@@ -41,12 +41,12 @@ struct {
 } data;
 
 
-double norm_pow2(point x){
+double norm_L2(point x){
     double val_norm = 0;
     for(auto x_i : x){
         val_norm += x_i * x_i;
     }
-    return val_norm;
+    return std::sqrt(val_norm);
 }
 
 // THE GRADIENT DESCENT FUNCTION
@@ -70,13 +70,13 @@ point gradient_method(
     for(unsigned int iter = 0; iter <= max_iter && dist_x > eps_s && grad_norm > eps_r; iter++){
         double alpha_current(alpha0);
         point grad_current = gradf(x_current);
-        grad_norm = norm_pow2(grad_current);
+        grad_norm = norm_L2(grad_current);
 
         //update alpha_k
         for(unsigned int iter2 = 0; iter <= max_iter; iter2++){
             point x_temp = {x_current[0] - alpha_current*grad_current[0], x_current[1] - alpha_current*grad_current[1]};
             double lhs_armijo = f(x_current) -f(x_temp);
-            double rhs_armijo = sigma * alpha_current * grad_norm;
+            double rhs_armijo = sigma * alpha_current * grad_norm*grad_norm;
 
             if(lhs_armijo >= rhs_armijo){
                 break;
