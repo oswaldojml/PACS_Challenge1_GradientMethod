@@ -1,0 +1,6 @@
+In the README you should write instruction for compiling and running the code.
+
+You should split in different files the implementation of structs and functions. Don't implement everything in the main.cpp.
+
+I would have expected you to let the user set the parameters and choose the minimization method runtime, for instance using GetPot/muparser.
+You could have implemented different strategies for the computation of the learning rate.
